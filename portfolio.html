@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Kookie Creates</title>
+<meta name="description" content="Browse completed custom diaries by Kookie Creates, organised by theme and occasion.">
+<link rel="canonical" href="https://example.com/portfolio">
+<meta property="og:title" content="Portfolio | Kookie Creates">
+<meta property="og:description" content="Browse completed custom diaries, organised by theme and occasion.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://example.com/portfolio">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Kookie <em>Creates</em></a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="portfolio.html" aria-current="page">Work</a></li>
+        <li><a href="diaries.html">Diaries</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="custom-order.html" class="btn btn-primary">Start a Custom Order</a>
+    </nav>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">Menu</button>
+  </div>
+</header>
+
+<main>
+  <div class="container breadcrumbs" aria-label="Breadcrumb">
+    <a href="index.html">Home</a> / Work
+  </div>
+
+  <section class="hero" style="padding-bottom:1rem;">
+    <div class="container">
+      <p class="hero-eyebrow">Portfolio</p>
+      <h1 style="max-width:18ch;">Diaries made from other people's ideas</h1>
+      <p class="lede">Each project started as a photograph, a theme or a rough idea. This page will hold real project photography once it's available.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="portfolio-filters" role="group" aria-label="Filter by category">
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="birthday" aria-pressed="false">Birthday</button>
+        <button data-filter="character" aria-pressed="false">Character</button>
+        <button data-filter="friendship" aria-pressed="false">Friendship</button>
+        <button data-filter="aesthetic" aria-pressed="false">Aesthetic</button>
+      </div>
+
+      <div class="work-grid">
+        <a class="work-card" data-category="birthday" href="portfolio-project.html">
+          <div class="placeholder-img">Birthday memory diary, cover photograph</div>
+          <div class="work-meta"><h3>A birthday memory diary</h3><p class="tag">Birthday · Photographs</p></div>
+        </a>
+        <a class="work-card" data-category="character" href="portfolio-project.html">
+          <div class="placeholder-img">Fandom-themed diary detail</div>
+          <div class="work-meta"><h3>A fandom-inspired diary</h3><p class="tag">Character</p></div>
+        </a>
+        <a class="work-card" data-category="friendship" href="portfolio-project.html">
+          <div class="placeholder-img">Friendship diary interior spread</div>
+          <div class="work-meta"><h3>Friendship memory book</h3><p class="tag">Friendship</p></div>
+        </a>
+        <a class="work-card" data-category="aesthetic" href="portfolio-project.html">
+          <div class="placeholder-img">Minimal aesthetic diary cover</div>
+          <div class="work-meta"><h3>A quiet, minimal diary</h3><p class="tag">Aesthetic</p></div>
+        </a>
+        <a class="work-card" data-category="birthday" href="portfolio-project.html">
+          <div class="placeholder-img">Farewell diary, gifted design</div>
+          <div class="work-meta"><h3>A farewell gift diary</h3><p class="tag">Occasion</p></div>
+        </a>
+        <a class="work-card" data-category="character" href="portfolio-project.html">
+          <div class="placeholder-img">Quote-led diary spread</div>
+          <div class="work-meta"><h3>A quote-led diary</h3><p class="tag">Typography</p></div>
+        </a>
+      </div>
+
+      <p style="margin-top:2rem; color:var(--ink-muted); font-size:0.92rem;">Categories are only shown once matching work exists. Replace these placeholder projects with real photography and project details before launch.</p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <h2>See something close to what you have in mind?</h2>
+      <p>Tell us about your own idea and we'll take it from there.</p>
+      <a href="custom-order.html" class="btn btn-primary">Start a Custom Order</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo">Kookie <em>Creates</em></a>
+        <p style="margin-top:0.8rem; color:var(--ink-muted); max-width:32ch;">Custom diaries designed around your photographs, memories and ideas, arranged by hand.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="portfolio.html">Work</a></li>
+          <li><a href="diaries.html">Diaries</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="custom-order.html">Start a Custom Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Policies</h3>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Kookie Creates. All rights reserved.</span>
+      <span>Placeholder contact details, replace before launch.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
