@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalka Digital — Photo Studio, Khanpur Delhi</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <style>
+    main{padding-top:0}
+    .eyebrow{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--on-surface-variant);display:block;margin-bottom:1rem}
+    .cta{display:inline-block;font-size:.72rem;font-weight:400;letter-spacing:.2em;text-transform:lowercase;text-decoration:none;color:inherit;border-bottom:1px solid currentColor;padding-bottom:3px;transition:opacity .25s}
+    .cta:hover{opacity:.5}
+    .section-title{font-size:1.7rem;letter-spacing:.04em;font-weight:300;margin-bottom:2.4rem}
+
+    /* HERO — full-bleed, one CTA */
+    .hero{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:#000}
+    .slider-container{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;cursor:grab}
+    .slider-container::-webkit-scrollbar{display:none}
+    .slide{scroll-snap-align:start;flex:0 0 100%;height:100%;position:relative}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .slide-overlay{position:absolute;inset:0;background:rgba(0,0,0,.18)}
+    .hero-content{position:absolute;left:0;right:0;bottom:6.5rem;z-index:5;text-align:center;color:#fff;pointer-events:none}
+    .hero-content h1{font-family:var(--font-display);font-weight:600!important;font-size:clamp(2rem,5vw,3.6rem);letter-spacing:.26em!important;text-transform:uppercase}
+    .hero-content p{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;margin:1.1rem 0 1.8rem}
+    .hero-content .cta{pointer-events:auto;color:#fff}
+    .slider-controls{position:absolute;bottom:2rem;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:center;gap:1.6rem}
+    .slider-btn{background:none;border:none;color:#fff;cursor:pointer;display:flex;align-items:center;opacity:.8;transition:opacity .25s}
+    .slider-btn:hover{opacity:1}
+    .slide-dots{display:flex;gap:8px}
+    .dot{width:22px;height:1px;background:rgba(255,255,255,.45);cursor:pointer;transition:background .3s}
+    .dot.active{background:#fff}
+
+    /* SPLIT ENTRY */
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--surface)}
+    .split a{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;text-decoration:none;color:#fff}
+    .split img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+    .split a:hover img{transform:scale(1.03)}
+    .split span{position:absolute;left:0;right:0;bottom:2.4rem;text-align:center;font-size:.8rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase}
+    .split a::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,.35))}
+    .split span{z-index:2}
+    .link-row{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem 3rem;padding:2.6rem var(--px);border-bottom:1px solid var(--outline-variant)}
+    .link-row a{font-size:.72rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s}
+    .link-row a:hover{border-color:currentColor}
+
+    /* RAIL (carousel) */
+    .rail-section{padding:5.5rem 0 5.5rem var(--px)}
+    .rail-head{display:flex;justify-content:space-between;align-items:flex-end;padding-right:var(--px);margin-bottom:2.2rem}
+    .rail-head .section-title{margin:0}
+    .rail-ctrl{display:flex;gap:1.4rem}
+    .rail-ctrl button{background:none;border:none;cursor:pointer;color:var(--on-surface);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-family:var(--font-ui);transition:opacity .25s}
+    .rail-ctrl button:hover{opacity:.4}
+    .rail{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-right:var(--px)}
+    .rail::-webkit-scrollbar{display:none}
+    .card{flex:0 0 calc((100% - 3.6rem)/4);min-width:240px;scroll-snap-align:start;text-decoration:none;color:inherit}
+    .card .img{aspect-ratio:4/5;background:var(--surface-container);overflow:hidden;margin-bottom:1rem}
+    .card .img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+    .card:hover .img img{transform:scale(1.03)}
+    .card h3{font-size:.8rem;font-weight:400;letter-spacing:.04em!important;margin-bottom:.3rem}
+    .card p{font-size:.72rem;color:var(--on-surface-variant);letter-spacing:.04em}
+    .card.gear .img{aspect-ratio:1;background:var(--surface-container)}
+    .card.gear .img img{object-fit:contain;padding:1.2rem}
+
+    /* FULL-BLEED BANNER */
+    .banner{position:relative;display:block;height:78vh;min-height:420px;overflow:hidden;color:#fff;text-decoration:none}
+    .banner img{width:100%;height:100%;object-fit:cover}
+    .banner::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.28)}
+    .banner div{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--px)}
+    .banner h2{font-size:clamp(1.6rem,3.4vw,2.6rem);letter-spacing:.1em!important;max-width:18ch;margin-bottom:1.6rem}
+
+    /* SERVICES — editorial list */
+    .services{padding:6rem var(--px);max-width:1200px;margin:0 auto}
+    .service{display:grid;grid-template-columns:90px 1fr 2fr;gap:2rem;align-items:baseline;padding:2.2rem 0;border-top:1px solid var(--outline-variant);text-decoration:none;color:inherit;transition:padding-left .4s var(--ease)}
+    .service:last-child{border-bottom:1px solid var(--outline-variant)}
+    .service:hover{padding-left:.8rem}
+    .service small{font-size:.68rem;letter-spacing:.2em;color:var(--outline)}
+    .service h3{font-size:1.1rem;letter-spacing:.06em!important}
+    .service p{font-size:.82rem;line-height:1.85;color:var(--on-surface-variant);max-width:60ch}
+    @media(max-width:768px){.service{grid-template-columns:1fr;gap:.6rem}}
+
+    /* CLOSING CTA */
+    .closing{text-align:center;padding:7rem var(--px);border-top:1px solid var(--outline-variant)}
+    .closing h2{font-size:1.9rem;letter-spacing:.05em!important;margin-bottom:.8rem}
+    .closing p{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-surface-variant);margin-bottom:2.4rem}
+    .closing .btn-book{display:inline-block}
+
+    @media(max-width:900px){.card{flex-basis:62%}.split{grid-template-columns:1fr}.split a{aspect-ratio:1}.hero-content{bottom:5.5rem}}
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">Kalka digital</a>
+    <div class="navbar-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="wedding-gallery.html">Wedding</a>
+      <a href="family-functions.html">Family</a>
+      <a href="haldi-mehndi.html">Haldi/Mehndi</a>
+      <a href="video-gallery.html">Films</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="navbar-controls">
+      <a href="contact.html" class="btn-book">Book a Session</a>
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="material-symbols-outlined icon-sun">light_mode</span>
+        <span class="material-symbols-outlined icon-moon">dark_mode</span>
+      </button>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="menu-toggle-box"><span class="menu-toggle-inner"></span></span>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay">
+    <div class="mobile-menu-drawer">
+      <div class="mobile-menu-links">
+        <a href="index.html" class="mobile-link active">Home</a>
+        <a href="gallery.html" class="mobile-link">Gallery</a>
+        <a href="wedding-gallery.html" class="mobile-link">Wedding</a>
+        <a href="family-functions.html" class="mobile-link">Family</a>
+        <a href="haldi-mehndi.html" class="mobile-link">Haldi/Mehndi</a>
+        <a href="video-gallery.html" class="mobile-link">Films</a>
+        <a href="about.html" class="mobile-link">About</a>
+        <a href="contact.html" class="mobile-link">Contact</a>
+      </div>
+      <div class="mobile-drawer-footer">
+        <a href="contact.html" class="btn-book-mobile">Book a Session</a>
+        <button class="mobile-theme-toggle" aria-label="Toggle dark mode">
+          <span class="material-symbols-outlined icon-sun">light_mode</span>
+          <span class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 1 · HERO -->
+    <section class="hero">
+      <div class="slider-container" id="hero-slider">
+        <div class="slide active"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953305/2_zn2zai.png" alt="Kalka Digital — landscape photography" /><div class="slide-overlay"></div></div>
+        <div class="slide"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953305/1_inn4rv.png" alt="Kalka Digital — misty forest" /><div class="slide-overlay"></div></div>
+        <div class="slide"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953305/3_zregut.png" alt="Kalka Digital — ocean" /><div class="slide-overlay"></div></div>
+      </div>
+      <div class="hero-content">
+        <h1>Kalka Digital</h1>
+        <p>Light. Silence. Perspective.</p>
+        <a href="contact.html" class="cta">book a session</a>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="prev-slide" aria-label="Previous slide"><span class="material-symbols-outlined" style="font-size:20px">arrow_back</span></button>
+        <div class="slide-dots" id="slide-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+        <button class="slider-btn" id="next-slide" aria-label="Next slide"><span class="material-symbols-outlined" style="font-size:20px">arrow_forward</span></button>
+      </div>
+    </section>
+
+    <!-- 2 · SPLIT ENTRY -->
+    <section>
+      <div class="split">
+        <a href="wedding-gallery.html"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953298/3_nasve4.png" alt="Wedding photography" /><span>Wedding</span></a>
+        <a href="family-functions.html"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953296/2_f4bisf.png" alt="Family functions" /><span>Family</span></a>
+      </div>
+      <div class="link-row">
+        <a href="haldi-mehndi.html">Haldi / Mehndi</a>
+        <a href="video-gallery.html">Films</a>
+        <a href="gallery.html">Full Gallery</a>
+      </div>
+    </section>
+
+    <!-- 3 · SELECTED WORKS RAIL -->
+    <section class="rail-section">
+      <div class="rail-head reveal">
+        <h2 class="section-title">Selected Works</h2>
+        <div class="rail-ctrl"><button data-rail="works" data-dir="-1">Previous</button><button data-rail="works" data-dir="1">Next</button></div>
+      </div>
+      <div class="rail" id="rail-works">
+        <a href="gallery.html" class="card"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953296/1_wo4mvy.png" alt="The Quiet Gaze" loading="lazy" /></div><h3>The Quiet Gaze</h3><p>Portraits — 01</p></a>
+        <a href="gallery.html" class="card"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953296/2_f4bisf.png" alt="Eternal Mist" loading="lazy" /></div><h3>Eternal Mist</h3><p>Portraits — 02</p></a>
+        <a href="gallery.html" class="card"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953298/3_nasve4.png" alt="Bridal Radiance" loading="lazy" /></div><h3>Bridal Radiance</h3><p>Portraits — 03</p></a>
+      </div>
+    </section>
+
+    <!-- 4 · FULL-BLEED BANNER (vision) -->
+    <a href="about.html" class="banner">
+      <img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953305/quote_rqw38g.jpg" alt="The vision behind Kalka Digital" loading="lazy" />
+      <div><h2>The Power of the Unspoken</h2><span class="cta">read our philosophy</span></div>
+    </a>
+
+    <!-- 5 · SERVICES -->
+    <section class="services">
+      <span class="eyebrow reveal">What we do</span>
+      <a href="packages.html" class="service reveal"><small>01</small><h3>Editorial Portraiture</h3><p>High-concept portrait sessions for brands, publications, and individuals seeking a refined aesthetic.</p></a>
+      <a href="packages.html" class="service reveal"><small>02</small><h3>Event Photography</h3><p>Captures moments that can never be recreated, preserving memories for a lifetime. It documents the emotions, highlights and overall story of an event in a powerful visual way.</p></a>
+      <a href="packages.html" class="service reveal"><small>03</small><h3>Product Photography</h3><p>The art of capturing high-quality images of products to showcase them in the best possible light.</p></a>
+    </section>
+
+    <!-- 6 · GEAR RAIL -->
+    <section class="rail-section" style="padding-top:0">
+      <div class="rail-head reveal">
+        <h2 class="section-title">Our Gear</h2>
+        <div class="rail-ctrl"><button data-rail="gear" data-dir="-1">Previous</button><button data-rail="gear" data-dir="1">Next</button></div>
+      </div>
+      <div class="rail" id="rail-gear">
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953303/canon_r6_lw8jnf.png" alt="Canon R6" loading="lazy" /></div><h3>Canon R6</h3></div>
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953304/r6_mii_tjlehy.png" alt="Canon R6 Mark II" loading="lazy" /></div><h3>Canon R6 Mark II</h3></div>
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953304/80d_w69ewo.png" alt="Canon 80D" loading="lazy" /></div><h3>Canon 80D</h3></div>
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953303/alpha_m3_zymhwu.png" alt="Sony Alpha" loading="lazy" /></div><h3>Sony Alpha</h3></div>
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953304/alpha_7_m4_ht7saa.png" alt="Sony Alpha 7 IV" loading="lazy" /></div><h3>Sony Alpha 7 IV</h3></div>
+        <div class="card gear"><div class="img"><img src="https://res.cloudinary.com/drppdpiyi/image/upload/v1779953304/if_oxrlmt.png" alt="If we do not have a camera available, we would be happy to arrange one for you." loading="lazy" /></div><h3>Need another camera?</h3><p>We are happy to arrange one for you.</p></div>
+      </div>
+    </section>
+
+    <!-- 7 · CLOSING CTA -->
+    <section class="closing">
+      <h2 class="reveal">Let’s create something timeless</h2>
+      <p class="reveal">Khanpur, Delhi</p>
+      <a href="contact.html" class="btn-book reveal">Book a Session</a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>
+      <div class="footer-brand">Kalka digital</div>
+      <p>© 2026 Kalka digital. All Rights Reserved.</p>
+    </div>
+    <div>
+      <span class="footer-heading">Directory</span>
+      <a href="https://www.instagram.com/kalka.studio1999/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@KalkaStudio" target="_blank" rel="noopener">Youtube</a>
+      <a href="https://www.justdial.com/Delhi/Kalka-Digital-Photo-Studio-Khanpur/011PXX11-XX11-141117175737-Z3Q6_BZDET?auto=1&trkid=2305672264&term=kalka%20studio%20khanpur" target="_blank" rel="noopener">Just Dial</a>
+      <a href="https://maps.app.goo.gl/UT1yKP69UiYti4FJ9" target="_blank" rel="noopener">Google Maps</a>
+    </div>
+    <div>
+      <span class="footer-heading">Contact</span>
+      <span>kalkastd@gmail.com</span>
+      <span style="margin-top:1rem;">Newsletter</span>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="EMAIL ADDRESS" />
+        <button class="material-symbols-outlined" aria-label="Subscribe">trending_flat</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="nav-tone.js"></script>
+  <script>
+    {
+      // Hero slider (block-scoped to avoid const clashes with main.js)
+      const slider = document.getElementById('hero-slider');
+      const dots = document.querySelectorAll('.dot');
+      const slides = document.querySelectorAll('.slide');
+      let cur = 0;
+      function go(n) {
+        cur = (n + slides.length) % slides.length;
+        slider.scrollTo({ left: cur * slider.clientWidth, behavior: 'smooth' });
+        dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+        slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+      }
+      document.getElementById('prev-slide').addEventListener('click', () => go(cur - 1));
+      document.getElementById('next-slide').addEventListener('click', () => go(cur + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+      setInterval(() => go(cur + 1), 6000);
+      // keep dots in sync when the user swipes/drags
+      slider.addEventListener('scroll', () => {
+        const i = Math.round(slider.scrollLeft / slider.clientWidth);
+        if (i !== cur && i >= 0 && i < slides.length) {
+          cur = i;
+          dots.forEach((d, k) => d.classList.toggle('active', k === i));
+        }
+      }, { passive: true });
+      // Rails: Previous / Next (no autoplay)
+      document.querySelectorAll('[data-rail]').forEach(b => b.addEventListener('click', () => {
+        const rail = document.getElementById('rail-' + b.dataset.rail);
+        const card = rail.querySelector('.card');
+        rail.scrollBy({ left: (card.offsetWidth + 19) * +b.dataset.dir, behavior: 'smooth' });
+      }));
+    }
+  </script>
+</body>
+</html>
